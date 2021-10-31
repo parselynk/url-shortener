@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+/**
+ * @note due to lack of time and for the sake of simplicity
+ * the hit logic was mainly implemented here and in Url::getRediractionPath.
+ */
+Route::get('/{UUID}', function ($uuid) {
+    $url = \App\Models\Url::where('shortcode_uuid', $uuid)->firstOrFail();
+    return redirect($url->getRediractionPath());
 });

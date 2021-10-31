@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UrlController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1/url')->group(function () {
+    Route::get('/{uuid}', [UrlController::class, 'show']);
+    Route::post('/', [UrlController::class, 'store']);
+    Route::put('/{uuid}', [UrlController::class, 'update']);
 });
