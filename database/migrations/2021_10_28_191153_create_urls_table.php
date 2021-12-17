@@ -16,10 +16,12 @@ class CreateUrlsTable extends Migration
         Schema::create('urls', function (Blueprint $table) {
             $table->id();
             $table->string('shortcode_uuid', 5)->unique();
-            $table->mediumText('redirect_url')->unique();
+            $table->string('redirect_url', 500);
             $table->bigInteger('hit_count')->unsigned()->default(0);
             $table->boolean('active')->default(true);
             $table->timestamps();
+
+            $table->unique('redirect_url');
         });
     }
 
